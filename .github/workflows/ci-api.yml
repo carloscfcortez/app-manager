@@ -17,8 +17,8 @@ jobs:
         with:
           dotnet-version: 3.1.301
       - name: Install dependencies
-        run: cd api && dotnet restore
+        run: cd api/src/AppManager.Services.Api && dotnet restore
       - name: Build
-        run: cd api && dotnet build --configuration Release --no-restore
+        run: cd api/src/AppManager.Services.Api && dotnet build --configuration Release --no-restore
       - name: Test
-        run: cd api && dotnet test --no-restore --verbosity normal
+        run: cd api/tests/AppManager.UnitTests && dotnet test --no-restore --verbosity normal
