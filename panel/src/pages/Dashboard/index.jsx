@@ -1,6 +1,6 @@
-import { Container, Row, Col } from 'reactstrap';
-import NavbarDefault from '../../components/Navbars/NavbarDefault';
-import styled from 'styled-components';
+import { Container, Row, Col } from 'reactstrap'
+import NavbarDefault from '../../components/Navbars/NavbarDefault'
+import styled from 'styled-components'
 
 export default function Dashboard() {
   return (
@@ -14,9 +14,9 @@ export default function Dashboard() {
         </Row>
       </ContainerBody>
     </>
-  );
+  )
 }
 
 const ContainerBody = styled(Container)`
   padding-top: 10px;
-`;
+`
