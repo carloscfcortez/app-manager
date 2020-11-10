@@ -6,7 +6,7 @@
     "pomar-manager": {
       "hosting": {
         "production": [
-          "pomar-manager-prod"
+          "pomar-manager"
         ]
       }
     }
