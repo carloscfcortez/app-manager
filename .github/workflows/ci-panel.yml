@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-
+      - run: cd panel && npm install
       - run: cd panel && npm run build:production
       - uses: w9jds/firebase-action@master
         with:
