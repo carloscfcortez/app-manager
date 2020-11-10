@@ -24,7 +24,6 @@ export default function Groups({ history }) {
       <ContainerBody fluid>
         <Row noGutters={true}>
           <Col>
-            <Link to="/groups/edit">Teste Add</Link>
             <Button color="info" onClick={() => history.push("/groups/edit")}>
               <FontAwesomeIcon icon="plus-circle" /> Adicionar
             </Button>
@@ -39,6 +38,7 @@ export default function Groups({ history }) {
             <Table striped>
               <thead>
                 <tr>
+                  <th></th>
                   <th>Código</th>
                   <th>Name</th>
                 </tr>
@@ -47,6 +47,21 @@ export default function Groups({ history }) {
                 {rows?.map((item, index) => {
                   return (
                     <tr key={index}>
+                      <th>
+                        <Button color="danger" size="sm">
+                          <FontAwesomeIcon icon="trash" />
+                        </Button>
+                        <SpaceVertical />
+                        <Button
+                          color="info"
+                          size="sm"
+                          onClick={() =>
+                            history.push(`/groups/edit/${item.Id}`)
+                          }
+                        >
+                          <FontAwesomeIcon icon="edit" />
+                        </Button>
+                      </th>
                       <th scope="row">{item.Id}</th>
                       <td>{item.Name}</td>
                     </tr>
@@ -67,4 +82,8 @@ const ContainerBody = styled(Container)`
 
 const SpaceRow = styled(Row)`
   padding-top: 5px;
+`;
+
+const SpaceVertical = styled("span")`
+  padding-left: 5px;
 `;
