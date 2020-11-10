@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - run: cd panel/ && npm run build:production
+      - run: cd panel && npm run build:production
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting -P production
