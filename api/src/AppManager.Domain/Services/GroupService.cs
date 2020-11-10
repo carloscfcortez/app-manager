@@ -1,4 +1,5 @@
-﻿using AppManager.Domain.Entities;
+﻿using System.Collections.Generic;
+using AppManager.Domain.Entities;
 using AppManager.Domain.Interfaces;
 using AppManager.Domain.Interfaces.Services;
 
@@ -12,9 +13,9 @@ namespace AppManager.Domain.Services
             _repository = repository;
         }
 
-        public Group FindByName(string name)
+        public IEnumerable<Group> FindFilterByNameOrId(string filter)
         {
-           return _repository.FindByName(name);
+           return _repository.FindFilterByNameOrId(filter);
         }
     }
 }

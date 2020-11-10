@@ -6,7 +6,7 @@ export default class Api {
     headers.set("Content-Type", "application/json");
     headers.set("Accept", "application/json");
 
-    let uri = BASE_URL + endpoint;
+    let uri = BASE_URL + "/api" + endpoint;
     let response;
 
     if (method === "GET" || method === "DELETE") {
@@ -21,8 +21,12 @@ export default class Api {
     }
 
     if (response.ok) {
-      return await response.json();
-      // else return true;
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        return await response.json();
+      } else {
+        return await response.text();
+      }
     }
   }
 

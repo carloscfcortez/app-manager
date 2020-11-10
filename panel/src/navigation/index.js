@@ -21,7 +21,7 @@ export function Navigation() {
         <Route path="/dashboard" component={Dashboard}></Route>
         <Route path="/groups" exact={true} component={Groups}></Route>
         <Route path="/groups/edit/:id" component={GroupEdit}></Route>
-        <Route path="/groups/edit" component={GroupEdit}></Route>
+        <Route exact={true} path="/groups/edit" component={GroupEdit}></Route>
       </Switch>
     </BrowserRouter>
   );

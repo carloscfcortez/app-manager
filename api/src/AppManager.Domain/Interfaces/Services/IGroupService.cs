@@ -1,9 +1,10 @@
-﻿using AppManager.Domain.Entities;
+﻿using System.Collections.Generic;
+using AppManager.Domain.Entities;
 
 namespace AppManager.Domain.Interfaces.Services
 {
     public interface IGroupService : IServiceBase<Group>
     {
-        Group FindByName(string name);
+        IEnumerable<Group> FindFilterByNameOrId(string filter);
     }
 }

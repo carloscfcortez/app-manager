@@ -8,6 +8,10 @@ import {
   faPlusCircle,
   faTrash,
   faEdit,
+  faSearch,
+  faBackward,
+  faBackspace,
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -18,7 +22,11 @@ library.add(
   faCheckCircle,
   faPlusCircle,
   faTrash,
-  faEdit
+  faEdit,
+  faSearch,
+  faBackward,
+  faBackspace,
+  faArrowLeft
 );
 
 function App() {

@@ -3,6 +3,7 @@ using AppManager.Domain.Entities;
 using AppManager.Domain.Interfaces;
 using AppManager.Infrastructure.Data.Context;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AppManager.Infrastructure.Data.Repositories
 {
@@ -14,9 +15,11 @@ namespace AppManager.Infrastructure.Data.Repositories
             _context = context;
         }
 
-        public Group FindByName(string name)
+        public IEnumerable<Group> FindFilterByNameOrId(string filter)
         {
-            return this.DbSet.Where(x => x.Name.ToLower().Contains(name.ToLower())).FirstOrDefault();
+            return DbSet
+                .Where(x => x.Name.ToLower().Contains(filter.ToLower()) || x.Id.ToString().Contains(filter))
+                .AsEnumerable();
         }
     }
 }

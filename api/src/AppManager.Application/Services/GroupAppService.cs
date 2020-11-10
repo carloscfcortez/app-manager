@@ -1,4 +1,5 @@
-﻿using AppManager.Application.Interfaces;
+﻿using System.Collections.Generic;
+using AppManager.Application.Interfaces;
 using AppManager.Domain.Entities;
 using AppManager.Domain.Interfaces.Services;
 
@@ -13,9 +14,9 @@ namespace AppManager.Application.Services
             _appService = service;
         }
 
-        public Group FindByName(string name)
+        public IEnumerable<Group> FindFilterByNameOrId(string name)
         {
-            return _appService.FindByName(name);
+            return _appService.FindFilterByNameOrId(name);
         }
     }
 }
