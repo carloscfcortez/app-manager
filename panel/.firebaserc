@@ -1,6 +1,14 @@
 {
   "projects": {
-    "default": "pomar-manager",
-    "production": "pomar-manager"
+    "default": "pomar-manager"
+  },
+  "targets": {
+    "pomar-manager": {
+      "hosting": {
+        "production": [
+          "pomar-manager-prod"
+        ]
+      }
+    }
   }
 }
