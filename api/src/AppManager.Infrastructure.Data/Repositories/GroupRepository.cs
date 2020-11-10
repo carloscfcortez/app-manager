@@ -6,8 +6,13 @@ using System.Linq;
 
 namespace AppManager.Infrastructure.Data.Repositories
 {
-  public class GroupRepository : RepositoryBase<Group>, IGroupRepository
-  {
+    public class GroupRepository : RepositoryBase<Group>, IGroupRepository
+    {
+        private readonly DataContext _context;
+        public GroupRepository(DataContext context) : base(context)
+        {
+            _context = context;
+        }
 
         public Group FindByName(string name)
         {

@@ -7,47 +7,48 @@ using AppManager.Infrastructure.Data.Context;
 
 namespace AppManager.Infrastructure.Data.Repositories
 {
-  public class RepositoryBase<T> : IDisposable, IRepositoryBase<T> where T : class
-  {
-    protected DataContext Db = new DataContext();
-    protected DbSet<T> DbSet { get; set; }
-
-    public RepositoryBase()
+    public class RepositoryBase<T> : IDisposable, IRepositoryBase<T> where T : class
     {
-      DbSet = Db.Set<T>();
-    }
+        private readonly DataContext _context;// = new DataContext();
+        protected DbSet<T> DbSet { get; set; }
 
-    public async Task Add(T entity)
-    {
-      await DbSet.AddAsync(entity);
-      await Db.SaveChangesAsync();
-    }
+        public RepositoryBase(DataContext cotext)
+        {
+            _context = cotext;
+            DbSet = cotext.Set<T>();
+        }
 
-    public async Task Delete(int id)
-    {
-      DbSet.Remove(await Find(id));
-      await Db.SaveChangesAsync();
-    }
+        public async Task Add(T entity)
+        {
+            await DbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
 
-    public void Dispose()
-    {
-      Db.Dispose();
-    }
+        public async Task Delete(int id)
+        {
+            DbSet.Remove(await Find(id));
+            await _context.SaveChangesAsync();
+        }
 
-    public async Task<T> Find(int id)
-    {
-      return await DbSet.FindAsync(id);
-    }
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
 
-    public async Task<IEnumerable<T>> FindAll()
-    {
-      return await DbSet.ToListAsync();
-    }
+        public async Task<T> Find(int id)
+        {
+            return await DbSet.FindAsync(id);
+        }
 
-    public async Task Update(T entity)
-    {
-      Db.Entry(entity).State = EntityState.Modified;
-      await Db.SaveChangesAsync();
+        public async Task<IEnumerable<T>> FindAll()
+        {
+            return await DbSet.ToListAsync();
+        }
+
+        public async Task Update(T entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
     }
-  }
 }

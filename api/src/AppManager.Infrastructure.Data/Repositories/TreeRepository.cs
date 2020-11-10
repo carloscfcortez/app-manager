@@ -6,7 +6,8 @@ using System.Linq;
 
 namespace AppManager.Infrastructure.Data.Repositories
 {
-  public class TreeRepository : RepositoryBase<Tree>, ITreeRepository
-  {
-  }
+    public class TreeRepository : RepositoryBase<Tree>, ITreeRepository
+    {
+        public TreeRepository(DataContext context) : base(context) { }
+    }
 }

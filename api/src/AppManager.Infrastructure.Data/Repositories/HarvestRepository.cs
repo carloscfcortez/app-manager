@@ -8,5 +8,6 @@ namespace AppManager.Infrastructure.Data.Repositories
 {
   public class HarvestRepository : RepositoryBase<Harvest>, IHarvestRepository
   {
-  }
+        public HarvestRepository(DataContext context): base(context) { }
+    }
 }

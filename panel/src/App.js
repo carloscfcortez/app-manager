@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { Navigation } from "./navigation";
+// import { fab } from "@fortawesome/free-brands-svg-icons";
+import {
+  faCheckSquare,
+  faCoffee,
+  faPlus,
+  faCheckCircle,
+  faPlusCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+library.add(faCheckSquare, faCoffee, faPlus, faCheckCircle, faPlusCircle);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <Navigation />;
 }
 
 export default App;

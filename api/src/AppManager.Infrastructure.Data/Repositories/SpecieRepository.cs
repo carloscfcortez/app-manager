@@ -6,7 +6,8 @@ using System.Linq;
 
 namespace AppManager.Infrastructure.Data.Repositories
 {
-  public class SpecieRepository : RepositoryBase<Specie>, ISpecieRepository
-  {
-  }
+    public class SpecieRepository : RepositoryBase<Specie>, ISpecieRepository
+    {
+        public SpecieRepository(DataContext context) : base(context) { }
+    }
 }

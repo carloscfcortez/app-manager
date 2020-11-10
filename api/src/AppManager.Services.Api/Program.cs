@@ -5,59 +5,52 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AppManager.Domain.Entities;
 using AppManager.Infrastructure.Data.Context;
+using System;
+using Microsoft.Extensions.Logging;
 
 namespace AppManager.Services.Api
 {
-  public class Program
-  {
-    public static void Main(string[] args)
+    public class Program
     {
-      var host = CreateHostBuilder(args).Build();
+        public static void Main(string[] args)
+        {
+            var host = CreateHostBuilder(args).Build();
 
-      //using (var scope = host.Services.CreateScope())
-      //{
-      //  var db = scope.ServiceProvider.GetRequiredService<DataContext>();
-      //  db.Database.Migrate();
+            CreateDbIfNotExists(host);
 
-      //  if (!db.Cities.ToList().Any())
-      //  {
-      //    db.Add(new City()
-      //    {
-      //      Name = "Curitiba",
-      //      Status = true
-      //    });
-      //    db.Add(new City()
-      //    {
-      //      Name = "Florianópolis",
-      //      Status = true
-      //    });
 
-      //    db.Add(new City()
-      //    {
-      //      Name = "Porto Alegre",
-      //      Status = true
-      //    });
+            host.Run();
 
-      //    db.SaveChanges();
+        }
 
-      //  }
-      //}
+        private static void CreateDbIfNotExists(IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<DataContext>();
+                    DbInitialize.Initialize(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred creating the DB.");
+                }
+            }
+        }
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var host = Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
 
-      host.Run();
+            return host;
+
+        }
 
     }
-
-    public static IHostBuilder CreateHostBuilder(string[] args)
-    {
-      var host = Host.CreateDefaultBuilder(args)
-          .ConfigureWebHostDefaults(webBuilder =>
-          {
-            webBuilder.UseStartup<Startup>();
-          });
-
-      return host;
-
-    }
-
-  }
 }

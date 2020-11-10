@@ -54,28 +54,27 @@ namespace AppManager.Services.Api
                 });
             });
 
-            services.AddDbContext<DataContext>(optio => { optio.UseSqlite("Data Source=AppManager.db"); });
+
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IGroupService, GroupService>();
+            services.AddTransient<IGroupAppService, GroupAppService>();
+            services.AddTransient<IGroupRepository, GroupRepository>();
 
 
-
-            services.AddSingleton<IGroupService, GroupService>();
-            services.AddSingleton<IGroupAppService, GroupAppService>();
-            services.AddSingleton<IGroupRepository, GroupRepository>();
-
-
-            services.AddSingleton<ISpecieService, SpecieService>();
-            services.AddSingleton<ISpecieAppService, SpecieAppService>();
-            services.AddSingleton<ISpecieRepository, SpecieRepository>();
+            services.AddTransient<ISpecieService, SpecieService>();
+            services.AddTransient<ISpecieAppService, SpecieAppService>();
+            services.AddTransient<ISpecieRepository, SpecieRepository>();
 
 
-            services.AddSingleton<ITreeService, TreeService>();
-            services.AddSingleton<ITreeAppService, TreeAppService>();
-            services.AddSingleton<ITreeRepository, TreeRepository>();
+            services.AddTransient<ITreeService, TreeService>();
+            services.AddTransient<ITreeAppService, TreeAppService>();
+            services.AddTransient<ITreeRepository, TreeRepository>();
 
 
-            services.AddSingleton<IHarvestService, HarvestService>();
-            services.AddSingleton<IHarvestAppService, HarvestAppService>();
-            services.AddSingleton<IHarvestRepository, HarvestRepository>();
+            services.AddTransient<IHarvestService, HarvestService>();
+            services.AddTransient<IHarvestAppService, HarvestAppService>();
+            services.AddTransient<IHarvestRepository, HarvestRepository>();
 
         }
 

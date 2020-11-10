@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AppManager.Domain.Entities
 {
-    public class Harvest
+    public class Harvest : EntityBase
     {
         public string Information { get; set; }
         public DateTime HarvestDate { get; set; }

@@ -19,19 +19,18 @@ namespace AppManager.Infrastructure.Data.Context
 
         public DbSet<Harvest> Harvests { get; set; }
 
+        public DataContext() { }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        public DataContext()
-        {
 
-        }
-     
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Data Source=AppManager.db");
 
-            base.OnConfiguring(optionsBuilder);
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //optionsBuilder.UseSqlServer("Data Source=AppManager.db");
 
-        }
+        //    base.OnConfiguring(optionsBuilder);
+
+        //}
 
 
 
