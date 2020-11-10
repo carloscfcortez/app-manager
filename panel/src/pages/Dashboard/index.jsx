@@ -1,6 +1,6 @@
-import { Container, Row, Col, Button, Table, NavLink } from "reactstrap";
-import NavbarDefault from "../../components/Navbars/NavbarDefault";
-import styled from "styled-components";
+import { Container, Row, Col } from 'reactstrap';
+import NavbarDefault from '../../components/Navbars/NavbarDefault';
+import styled from 'styled-components';
 
 export default function Dashboard() {
   return (

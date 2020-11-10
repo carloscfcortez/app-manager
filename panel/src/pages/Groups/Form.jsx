@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import {
   Container,
   Row,
@@ -9,61 +9,63 @@ import {
   CardHeader,
   CardFooter,
   CardBody,
-  Input,
-} from "reactstrap";
-import NavbarDefault from "../../components/Navbars/NavbarDefault";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Api from "../../services/index";
-import swal from "sweetalert";
+  Input
+} from 'reactstrap'
+import NavbarDefault from '../../components/Navbars/NavbarDefault'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Api from '../../services/index'
+import swal from 'sweetalert'
 export default function EditGroup(props) {
-  const { match, history } = props;
-  const [data, setData] = useState();
+  const { match, history } = props
+  const [data, setData] = useState()
 
   const handleGoBack = () => {
-    history.goBack("/groups");
-  };
+    history.goBack('/groups')
+  }
 
   useEffect(() => {
     async function load() {
-      console.log("params", match?.params?.id);
-      const { id } = match?.params;
-      setData(await Api.get(`/group/${id}`));
+      console.log('params', match?.params?.id)
+      const { id } = match?.params
+      setData(await Api.get(`/group/${id}`))
     }
-    load();
-  }, [match?.params?.id]);
+    load()
+  }, [match?.params?.id])
 
   const handleSave = async () => {
     try {
       if (data?.id) {
-        await Api.put(`/group/${data?.Id}`, { ...data });
-        swal("Sucesso!", "Registro atualizado com sucesso.", "success").then(
+        await Api.put(`/group/${data?.Id}`, { ...data })
+        swal('Sucesso!', 'Registro atualizado com sucesso.', 'success').then(
           (isConfirm) => {
-            if (isConfirm) handleGoBack();
+            if (isConfirm) handleGoBack()
           }
-        );
+        )
       } else {
-        await Api.post(`/group`, { ...data });
-        swal("Sucesso!", "Registro cadastrado com sucesso.", "success").then(
+        await Api.post(`/group`, { ...data })
+        swal('Sucesso!', 'Registro cadastrado com sucesso.', 'success').then(
           (isConfirm) => {
-            if (isConfirm) handleGoBack();
+            if (isConfirm) handleGoBack()
           }
-        );
+        )
       }
-    } catch (error) {}
-  };
+    } catch (error) {
+      swal('Ops!', error?.message, 'error')
+    }
+  }
 
   const changeValue = (fieldName, value) => {
-    var property = {};
+    var property = {}
     var descriptor = Object.create({
       enumerable: true,
       writable: true,
       configurable: true,
-      value: null,
-    });
-    descriptor.value = value;
-    Object.defineProperty(property, fieldName, descriptor);
-    setData({ ...data, ...property });
-  };
+      value: null
+    })
+    descriptor.value = value
+    Object.defineProperty(property, fieldName, descriptor)
+    setData({ ...data, ...property })
+  }
   return (
     <div>
       <NavbarDefault />
@@ -84,7 +86,7 @@ export default function EditGroup(props) {
                     <label>Nome</label>
                     <Input
                       onChange={(event) =>
-                        changeValue("Name", event?.target?.value)
+                        changeValue('Name', event?.target?.value)
                       }
                       value={data?.Name}
                     />
@@ -126,17 +128,13 @@ export default function EditGroup(props) {
         <SpaceRow />
       </ContainerBody>
     </div>
-  );
+  )
 }
 
 const ContainerBody = styled(Container)`
   padding-top: 10px;
-`;
+`
 
 const SpaceRow = styled(Row)`
   padding-top: 5px;
-`;
-
-const SpaceVertical = styled("span")`
-  padding-left: 5px;
-`;
+`

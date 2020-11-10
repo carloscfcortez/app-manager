@@ -7,47 +7,49 @@ import {
   Input,
   Card,
   CardHeader,
-  CardBody,
-} from "reactstrap";
-import NavbarDefault from "../../components/Navbars/NavbarDefault";
-import { useState, useEffect } from "react";
-import Api from "./../../services";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import swal from "sweetalert";
+  CardBody
+} from 'reactstrap'
+import NavbarDefault from './../../components/Navbars/NavbarDefault'
+import { useState, useEffect } from 'react'
+import Api from './../../services'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import swal from 'sweetalert'
 
 export default function Groups({ history }) {
-  const [rows, setRows] = useState(null);
-  const [filter, setFilter] = useState();
-  const [reload, setReload] = useState(false);
+  const [rows, setRows] = useState(null)
+  const [filter, setFilter] = useState()
+  const [reload, setReload] = useState(false)
 
   useEffect(() => {
     async function reloadData() {
       try {
-        const response = await Api.get("/group", { filter });
-        setRows(response);
-      } catch (error) {}
+        const response = await Api.get('/group', { filter })
+        setRows(response)
+      } catch (error) {
+        swal('Ops!', error?.message, 'error')
+      }
     }
-    reloadData();
-  }, [reload]);
+    reloadData()
+  }, [reload])
 
   const handleFilter = ({ target }) => {
-    setFilter(target?.value);
-  };
+    setFilter(target?.value)
+  }
 
   const handleDelete = async ({ Id }) => {
     const isConfirm = await swal({
-      title: "Deseja Excluir o registro?",
-      text: "As informações serão apagadas!",
-      icon: "warning",
+      title: 'Deseja Excluir o registro?',
+      text: 'As informações serão apagadas!',
+      icon: 'warning',
       buttons: true,
-      dangerMode: true,
-    });
+      dangerMode: true
+    })
 
     if (isConfirm) {
-      await Api.delete(`/group/${Id}`);
-      setReload(!reload);
+      await Api.delete(`/group/${Id}`)
+      setReload(!reload)
     }
-  };
+  }
 
   return (
     <>
@@ -65,10 +67,10 @@ export default function Groups({ history }) {
                   <Col>
                     <Button
                       color="info"
-                      onClick={() => history.push("/groups/edit")}
+                      onClick={() => history.push('/groups/edit')}
                       className="float-md-right"
                     >
-                      {" "}
+                      {' '}
                       <FontAwesomeIcon icon="plus-circle" /> Adicionar
                     </Button>
                   </Col>
@@ -128,7 +130,7 @@ export default function Groups({ history }) {
                               <th scope="row">{item.Id}</th>
                               <td>{item.Name}</td>
                             </tr>
-                          );
+                          )
                         })}
                       </tbody>
                     </Table>
@@ -140,5 +142,5 @@ export default function Groups({ history }) {
         </Row>
       </Container>
     </>
-  );
+  )
 }

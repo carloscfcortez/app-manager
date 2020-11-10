@@ -1,4 +1,4 @@
-import { Navigation } from "./navigation";
+import { Navigation } from './navigation'
 // import { fab } from "@fortawesome/free-brands-svg-icons";
 import {
   faCheckSquare,
@@ -11,9 +11,9 @@ import {
   faSearch,
   faBackward,
   faBackspace,
-  faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
+  faArrowLeft
+} from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
 
 library.add(
   faCheckSquare,
@@ -27,10 +27,10 @@ library.add(
   faBackward,
   faBackspace,
   faArrowLeft
-);
+)
 
 function App() {
-  return <Navigation />;
+  return <Navigation />
 }
 
-export default App;
+export default App

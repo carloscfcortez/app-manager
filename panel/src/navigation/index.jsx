@@ -1,17 +1,11 @@
-import React from "react";
-import { createBrowserHistory } from "history";
-import {
-  BrowserRouter,
-  Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
-import Groups from "../pages/Groups";
-import GroupEdit from "../pages/Groups/Form";
+import React from 'react'
+import { createBrowserHistory } from 'history'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Dashboard from '../pages/Dashboard'
+import Groups from '../pages/Groups'
+import GroupEdit from '../pages/Groups/Form'
 
-const hist = createBrowserHistory();
+const hist = createBrowserHistory()
 
 export function Navigation() {
   return (
@@ -24,5 +18,5 @@ export function Navigation() {
         <Route exact={true} path="/groups/edit" component={GroupEdit}></Route>
       </Switch>
     </BrowserRouter>
-  );
+  )
 }
