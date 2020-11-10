@@ -28,7 +28,7 @@ Para contribuir com o desenvolvimento, basta fazer o clone do projeto em uma dir
 `git clone https://github.com/carloscfcortez/teste-upper.git`
 
 ## Executar
-O repositório está composto por dois projetos, um FrontEend ([panel](/tree/main/api)) e outro Backend ([api](/tree/main/panel))
+O repositório está composto por dois projetos, um Frontend ([panel](/panel)) e outro Backend ([api](/panel))
 
 ### Api
 Para rodar a API, navegar pelo diretório na linha de comando ou atraves do explorer
