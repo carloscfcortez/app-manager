@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "pomar-manager",
+    "production": "pomar-manager"
+  }
+}
