@@ -1,4 +1,5 @@
-﻿using AppManager.Domain.Entities;
+﻿using System.Collections.Generic;
+using AppManager.Domain.Entities;
 using AppManager.Domain.Interfaces;
 using AppManager.Domain.Interfaces.Services;
 
@@ -10,6 +11,11 @@ namespace AppManager.Domain.Services
     public TreeService(ITreeRepository repository) : base(repository)
     {
       _repository = repository;
+    }
+
+    public IEnumerable<Tree> FindAllWithSpecie()
+    {
+      return _repository.FindAllWithSpecie();
     }
   }
 }

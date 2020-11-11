@@ -24,9 +24,9 @@ namespace AppManager.Services.Api.Controllers
     }
 
     [HttpGet]
-    public async Task<IEnumerable<TreeDTO>> Get()
+    public IEnumerable<TreeDTO> Get()
     {
-      IEnumerable<TreeDTO> treeDTO = _mapper.Map<IEnumerable<Tree>, IEnumerable<TreeDTO>>(await _service.FindAll());
+      IEnumerable<TreeDTO> treeDTO = _mapper.Map<IEnumerable<Tree>, IEnumerable<TreeDTO>>(_service.FindAllWithSpecie());
       return treeDTO;
     }
 

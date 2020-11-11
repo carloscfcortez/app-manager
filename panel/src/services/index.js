@@ -1,10 +1,12 @@
 import { stringify } from 'querystring'
+import swal from 'sweetalert'
 const BASE_URL = process.env.REACT_APP_API_URL
 export default class Api {
   static async fetchMethods(method = 'GET', endpoint = '/', params = {}) {
     let headers = new Headers()
     headers.set('Content-Type', 'application/json')
     headers.set('Accept', 'application/json')
+    headers.set('Access-Control-Allow-Origin', '*')
 
     let uri = BASE_URL + '/api' + endpoint
     let response
@@ -27,6 +29,12 @@ export default class Api {
       } else {
         return await response.text()
       }
+    }
+
+    if (!response.ok) {
+      const { errors } = await response.json()
+      swal('Ops! Ocorreu um erro.', JSON.stringify(errors), 'error')
+      throw JSON.stringify(errors)
     }
   }
 

@@ -26,16 +26,16 @@ const NavbarDefault = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/components/">Árvores</NavLink>
+              <NavLink href="/trees/">Árvores</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/groups/">Grupos</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/components/">Colheitas</NavLink>
+              <NavLink href="/harvests/">Colheitas</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/components/">Espécies</NavLink>
+              <NavLink href="/species/">Espécies</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>

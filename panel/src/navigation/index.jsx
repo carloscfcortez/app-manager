@@ -2,8 +2,9 @@ import React from 'react'
 import { createBrowserHistory } from 'history'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
-import Groups from '../pages/Groups'
-import GroupEdit from '../pages/Groups/Form'
+import GroupsRouptes from '../pages/Groups'
+import SpeciesRoutes from '../pages/Species'
+import TreesRoutes from '../pages/Trees'
 
 const hist = createBrowserHistory()
 
@@ -13,9 +14,10 @@ export function Navigation() {
       <Switch>
         <Route exact={true} path="/" component={Dashboard}></Route>
         <Route path="/dashboard" component={Dashboard}></Route>
-        <Route path="/groups" exact={true} component={Groups}></Route>
-        <Route path="/groups/edit/:id" component={GroupEdit}></Route>
-        <Route exact={true} path="/groups/edit" component={GroupEdit}></Route>
+
+        <Route path="/groups" component={GroupsRouptes}></Route>
+        <Route path="/species" component={SpeciesRoutes}></Route>
+        <Route path="/trees" component={TreesRoutes}></Route>
       </Switch>
     </BrowserRouter>
   )

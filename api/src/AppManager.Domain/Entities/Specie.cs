@@ -4,10 +4,10 @@ using System.Text;
 
 namespace AppManager.Domain.Entities
 {
-    public class Specie : EntityBase
-    {
-        public string PopularName { get; set; }
-        public string ScientificName { get; set; }
+  public class Specie : EntityBase
+  {
+    public string PopularName { get; set; }
+    public string ScientificName { get; set; }
 
-    }
+  }
 }

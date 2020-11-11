@@ -15,47 +15,55 @@ import NavbarDefault from '../../components/Navbars/NavbarDefault'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Api from '../../services/index'
 import swal from 'sweetalert'
-export default function EditGroup(props) {
+export default function EditTree(props) {
   const { match, history } = props
+  const [species, setSpecies] = useState([])
   const [data, setData] = useState({
-    Name: ''
+    SpecieId: '',
+    Description: '',
+    Age: ''
   })
+  let title = 'Árvores'
 
   const handleGoBack = () => {
-    history.goBack('/groups')
+    history.goBack('/trees')
   }
+
+  useEffect(() => {
+    ;(async function () {
+      setSpecies(await Api.get('/specie'))
+    })()
+  }, [])
 
   useEffect(() => {
     async function load() {
       const { id } = match?.params
-      setData(await Api.get(`/group/${id}`))
+      setData(await Api.get(`/tree/${id}`))
     }
     if (match?.params?.id) load()
   }, [match?.params?.id])
 
   const handleSave = async () => {
-    try {
-      if (data?.Id) {
-        await Api.put(`/group/${data?.Id}`, { ...data })
-        swal('Sucesso!', 'Registro atualizado com sucesso.', 'success').then(
-          (isConfirm) => {
-            if (isConfirm) handleGoBack()
-          }
-        )
-      } else {
-        await Api.post(`/group`, { ...data })
-        swal('Sucesso!', 'Registro cadastrado com sucesso.', 'success').then(
-          (isConfirm) => {
-            if (isConfirm) handleGoBack()
-          }
-        )
-      }
-    } catch (error) {
-      swal('Ops!', error?.message, 'error')
+    console.log(data)
+    if (data?.Id) {
+      await Api.put(`/tree/${data?.Id}`, { ...data })
+      swal('Sucesso!', 'Registro atualizado com sucesso.', 'success').then(
+        (isConfirm) => {
+          if (isConfirm) handleGoBack()
+        }
+      )
+    } else {
+      await Api.post(`/tree`, { ...data })
+      swal('Sucesso!', 'Registro cadastrado com sucesso.', 'success').then(
+        (isConfirm) => {
+          if (isConfirm) handleGoBack()
+        }
+      )
     }
   }
 
   const changeValue = (fieldName, value) => {
+    console.log(value)
     var property = {}
     var descriptor = Object.create({
       enumerable: true,
@@ -65,6 +73,7 @@ export default function EditGroup(props) {
     })
     descriptor.value = value
     Object.defineProperty(property, fieldName, descriptor)
+
     setData({ ...data, ...property })
   }
   return (
@@ -77,19 +86,52 @@ export default function EditGroup(props) {
               <CardHeader>
                 <Row>
                   <Col>
-                    <h3>Cadastro de Grupos</h3>
+                    <h3>Cadastro de {title}</h3>
                   </Col>
                 </Row>
               </CardHeader>
               <CardBody>
                 <Row>
                   <Col md={3}>
-                    <label>Nome</label>
+                    <label>Espécie</label>
+
+                    <Input
+                      type="select"
+                      // options={[{ value: 1, text: 'teste' }]}
+                      onChange={(event) =>
+                        changeValue('SpecieId', event?.target?.value)
+                      }
+                      defaultValue={data?.SpecieId}
+                    >
+                      <option>Selecione a Espécie</option>
+                      {species?.map((item) => (
+                        <option
+                          selected={data?.SpecieId === item?.Id}
+                          key={item?.Id}
+                          value={item?.Id}
+                        >
+                          {item?.PopularName + ' - ' + item?.ScientificName}
+                        </option>
+                      ))}
+                    </Input>
+                  </Col>
+                  <Col md={3}>
+                    <label>Descrição</label>
                     <Input
                       onChange={(event) =>
-                        changeValue('Name', event?.target?.value)
+                        changeValue('Description', event?.target?.value)
                       }
-                      value={data?.Name}
+                      value={data?.Description}
+                    />
+                  </Col>
+                  <Col md={3}>
+                    <label>Idade</label>
+                    <Input
+                      type="number"
+                      onChange={(event) =>
+                        changeValue('Age', event?.target?.value)
+                      }
+                      value={data?.Age}
                     />
                   </Col>
                 </Row>

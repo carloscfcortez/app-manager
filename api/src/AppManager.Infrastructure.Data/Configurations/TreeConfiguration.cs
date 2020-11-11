@@ -4,12 +4,14 @@ using AppManager.Domain.Entities;
 
 namespace AppManager.Infrastructure.Data.Configurations
 {
-    public class TreeConfiguration : IEntityTypeConfiguration<Tree>
+  public class TreeConfiguration : IEntityTypeConfiguration<Tree>
+  {
+    public void Configure(EntityTypeBuilder<Tree> builder)
     {
-        public void Configure(EntityTypeBuilder<Tree> builder)
-        {
-            builder.Property(x => x.Description).HasMaxLength(200);
-            builder.ToTable("Tree");
-        }
+      builder.Property(x => x.Description).HasMaxLength(200);
+      builder.HasOne(p => p.Specie);
+
+      builder.ToTable("Tree");
     }
+  }
 }
