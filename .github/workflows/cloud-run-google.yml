@@ -15,7 +15,7 @@ name: Build and Deploy to GKE
 on:
   pull_request:
     branches:
-      - master
+      - main
 # on:
 #   release:
 #     types: [created]
