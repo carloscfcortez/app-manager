@@ -19,5 +19,19 @@ services:
       - "1433:1433"
     networks:
       - appmanager_network
+  postgres:
+    image: postgres:9.6
+    container_name: "postgres"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: AppManager
+      PGDATA: /tmp
+    volumes:
+      - ./pgdata:/var/lib/postgresql/pg
+    ports:
+      - 5432:5432
+    networks:
+      - appmanager_network
 networks:
   appmanager_network:

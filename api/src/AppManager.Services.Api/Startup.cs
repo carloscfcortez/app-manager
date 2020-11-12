@@ -64,8 +64,8 @@ namespace AppManager.Services.Api
       });
 
 
-      services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+      // services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+      services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgresConnection")));
       services.AddTransient<IGroupService, GroupService>();
       services.AddTransient<IGroupAppService, GroupAppService>();
       services.AddTransient<IGroupRepository, GroupRepository>();
