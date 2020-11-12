@@ -4,9 +4,9 @@ using System.Text;
 
 namespace AppManager.Domain.Entities
 {
-    public class Group : EntityBase
-    {
-        public string Name { get; set; }
+  public class Group : EntityBase
+  {
+    public string Name { get; set; }
 
-    }
+  }
 }

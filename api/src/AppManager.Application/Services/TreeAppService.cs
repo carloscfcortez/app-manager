@@ -14,9 +14,9 @@ namespace AppManager.Application.Services
       _appService = service;
     }
 
-    public IEnumerable<Tree> FindAllWithSpecie()
+    public IEnumerable<Tree> FindAllWithIncludes(string specieName, string groupName)
     {
-      return _appService.FindAllWithSpecie();
+      return _appService.FindAllWithIncludes( specieName,  groupName);
     }
   }
 }

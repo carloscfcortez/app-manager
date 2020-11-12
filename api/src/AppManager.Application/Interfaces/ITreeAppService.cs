@@ -5,6 +5,6 @@ namespace AppManager.Application.Interfaces
 {
   public interface ITreeAppService : IAppServiceBase<Tree>
   {
-    IEnumerable<Tree> FindAllWithSpecie();
+    IEnumerable<Tree> FindAllWithIncludes(string specieName, string groupName);
   }
 }

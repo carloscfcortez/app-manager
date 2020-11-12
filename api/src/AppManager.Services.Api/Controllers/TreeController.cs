@@ -11,55 +11,56 @@ using AppManager.Domain.Entities;
 
 namespace AppManager.Services.Api.Controllers
 {
-  [Route("api/tree")]
-  [ApiController]
-  public class TreeController : ControllerBase
-  {
-    private readonly ITreeAppService _service;
-    private readonly IMapper _mapper;
-    public TreeController(ITreeAppService service, IMapper mapper)
+    [Route("api/tree")]
+    [ApiController]
+    public class TreeController : ControllerBase
     {
-      _service = service;
-      _mapper = mapper;
+        private readonly ITreeAppService _service;
+        private readonly IMapper _mapper;
+        public TreeController(ITreeAppService service, IMapper mapper)
+        {
+            _service = service;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public IEnumerable<TreeDTO> Get([FromQuery] string specieName, [FromQuery] string groupName)
+        {
+
+            IEnumerable<TreeDTO> treeDTO = _mapper.Map<IEnumerable<Tree>, IEnumerable<TreeDTO>>(_service.FindAllWithIncludes(specieName, groupName));
+            return treeDTO;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<TreeDTO> Get(int id)
+        {
+            TreeDTO treeDTO = _mapper.Map<Tree, TreeDTO>(await _service.Find(id));
+            return treeDTO;
+        }
+
+        [HttpPost]
+        public async Task Post([FromBody] TreeDTO value)
+        {
+            Tree entity = _mapper.Map<TreeDTO, Tree>(value);
+
+            await _service.Add(entity);
+
+        }
+
+        [HttpPut("{id}")]
+        public async Task Put(int id, [FromBody] TreeDTO value)
+        {
+
+            var treeEntity = await _service.Find(id);
+            Tree newEntity = _mapper.Map(value, treeEntity);
+
+            await _service.Update(newEntity);
+        }
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await _service.Delete(id);
+
+        }
     }
-
-    [HttpGet]
-    public IEnumerable<TreeDTO> Get()
-    {
-      IEnumerable<TreeDTO> treeDTO = _mapper.Map<IEnumerable<Tree>, IEnumerable<TreeDTO>>(_service.FindAllWithSpecie());
-      return treeDTO;
-    }
-
-    [HttpGet("{id}")]
-    public async Task<TreeDTO> Get(int id)
-    {
-      TreeDTO treeDTO = _mapper.Map<Tree, TreeDTO>(await _service.Find(id));
-      return treeDTO;
-    }
-
-    [HttpPost]
-    public async Task Post([FromBody] TreeDTO value)
-    {
-      Tree entity = _mapper.Map<TreeDTO, Tree>(value);
-
-      await _service.Add(entity);
-
-    }
-
-    [HttpPut("{id}")]
-    public async Task Put(int id, [FromBody] TreeDTO value)
-    {
-
-      var treeEntity = await _service.Find(id);
-      Tree newEntity = _mapper.Map(value, treeEntity);
-
-      await _service.Update(newEntity);
-    }
-    [HttpDelete("{id}")]
-    public async Task Delete(int id)
-    {
-      await _service.Delete(id);
-
-    }
-  }
 }

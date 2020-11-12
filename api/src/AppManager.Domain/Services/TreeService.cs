@@ -13,9 +13,9 @@ namespace AppManager.Domain.Services
       _repository = repository;
     }
 
-    public IEnumerable<Tree> FindAllWithSpecie()
+    public IEnumerable<Tree> FindAllWithIncludes(string specieName, string groupName)
     {
-      return _repository.FindAllWithSpecie();
+      return _repository.FindAllWithIncludes(specieName, groupName);
     }
   }
 }

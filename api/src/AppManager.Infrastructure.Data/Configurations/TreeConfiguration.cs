@@ -10,6 +10,7 @@ namespace AppManager.Infrastructure.Data.Configurations
     {
       builder.Property(x => x.Description).HasMaxLength(200);
       builder.HasOne(p => p.Specie);
+      builder.HasOne(p => p.Group);
 
       builder.ToTable("Tree");
     }

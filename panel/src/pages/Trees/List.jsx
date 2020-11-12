@@ -24,7 +24,7 @@ export default function Trees({ history }) {
   useEffect(() => {
     async function reloadData() {
       try {
-        const response = await Api.get('/tree', { filter })
+        const response = await Api.get('/tree', filter)
         if (response) setRows(response)
       } catch (error) {
         swal('Ops!', error?.message, 'error')
@@ -33,9 +33,9 @@ export default function Trees({ history }) {
     reloadData()
   }, [reload])
 
-  const handleFilter = ({ target }) => {
-    setFilter(target?.value)
-  }
+  // const handleFilter = ({ target }) => {
+  //   setFilter(target?.value)
+  // }
 
   const handleDelete = async ({ Id }) => {
     const isConfirm = await swal({
@@ -80,8 +80,31 @@ export default function Trees({ history }) {
               <CardBody>
                 <Row>
                   <Col md={5}>
-                    <Input name="filter" onChange={handleFilter} />
+                    <label>Espécie</label>
+                    <Input
+                      name="filter"
+                      onChange={(event) =>
+                        setFilter({
+                          ...filter,
+                          specieName: event?.target?.value
+                        })
+                      }
+                    />
                   </Col>
+                  <Col md={5}>
+                    <label>Grupo</label>
+                    <Input
+                      name="filter"
+                      onChange={(event) =>
+                        setFilter({
+                          ...filter,
+                          groupName: event?.target?.value
+                        })
+                      }
+                    />
+                  </Col>
+                </Row>
+                <Row className="pt-3">
                   <Col>
                     <Button
                       outline
@@ -100,6 +123,7 @@ export default function Trees({ history }) {
                           <th width={100}></th>
                           <th>Código</th>
                           <th>Espécie</th>
+                          <th>Grupo</th>
                           <th>Descrição</th>
                           <th>Idade</th>
                         </tr>
@@ -107,7 +131,7 @@ export default function Trees({ history }) {
                       <tbody>
                         {rows?.length < 1 ? (
                           <tr>
-                            <td className="alert alert-info" colSpan="5">
+                            <td className="alert alert-info" colSpan="6">
                               {' '}
                               Não possui Registros
                             </td>
@@ -137,6 +161,7 @@ export default function Trees({ history }) {
                                 </th>
                                 <th scope="row">{item.Id}</th>
                                 <td>{item.Specie?.PopularName}</td>
+                                <td>{item.Group?.Name}</td>
                                 <td>{item.Description}</td>
                                 <td>{item.Age}</td>
                               </tr>

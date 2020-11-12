@@ -12,9 +12,14 @@ namespace AppManager.Infrastructure.Data.Repositories
   {
     public TreeRepository(DataContext context) : base(context) { }
 
-    public IEnumerable<Tree> FindAllWithSpecie()
+    public IEnumerable<Tree> FindAllWithIncludes(string specieName, string groupName)
     {
-      return DbSet.Include(x => x.Specie).AsEnumerable();
+      return DbSet.Include(x => x.Specie)
+                .Include(X=>X.Group)
+                .Where(x=> (string.IsNullOrEmpty(specieName) || x.Specie.PopularName.Contains(specieName) || x.Specie.ScientificName.Contains(specieName))
+                && (string.IsNullOrEmpty(groupName) || x.Group.Name.Contains(groupName))
+                )
+                .AsEnumerable();
     }
   }
 }

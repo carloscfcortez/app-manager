@@ -18,8 +18,10 @@ import swal from 'sweetalert'
 export default function EditTree(props) {
   const { match, history } = props
   const [species, setSpecies] = useState([])
+  const [groups, setGroups] = useState([])
   const [data, setData] = useState({
     SpecieId: '',
+    GroupId: '',
     Description: '',
     Age: ''
   })
@@ -32,6 +34,7 @@ export default function EditTree(props) {
   useEffect(() => {
     ;(async function () {
       setSpecies(await Api.get('/specie'))
+      setGroups(await Api.get('/group'))
     })()
   }, [])
 
@@ -111,6 +114,29 @@ export default function EditTree(props) {
                           value={item?.Id}
                         >
                           {item?.PopularName + ' - ' + item?.ScientificName}
+                        </option>
+                      ))}
+                    </Input>
+                  </Col>
+                  <Col md={3}>
+                    <label>Espécie</label>
+
+                    <Input
+                      type="select"
+                      // options={[{ value: 1, text: 'teste' }]}
+                      onChange={(event) =>
+                        changeValue('GroupId', event?.target?.value)
+                      }
+                      defaultValue={data?.GroupId}
+                    >
+                      <option>Selecione o Grupo</option>
+                      {groups?.map((item) => (
+                        <option
+                          selected={data?.GroupId === item?.Id}
+                          key={item?.Id}
+                          value={item?.Id}
+                        >
+                          {item?.Name}
                         </option>
                       ))}
                     </Input>

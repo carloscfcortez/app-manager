@@ -24,7 +24,7 @@ namespace AppManager.Services.Api.Controllers
     }
 
     [HttpGet]
-    public async Task<IEnumerable<SpecieDTO>> Get()
+    public async Task<IEnumerable<SpecieDTO>> Get([FromQuery] string filter)
     {
       IEnumerable<SpecieDTO> specieDTO = _mapper.Map<IEnumerable<Specie>, IEnumerable<SpecieDTO>>(await _service.FindAll());
       return specieDTO;

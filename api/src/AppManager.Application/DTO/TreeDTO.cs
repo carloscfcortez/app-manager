@@ -11,12 +11,18 @@ namespace AppManager.Application.DTO
 
 
     [Required]
+    public int GroupId { get; set; }
+
+
+    [Required]
     public int Age { get; set; }
 
     [StringLength(200)]
     public string Description { get; set; }
 
     public SpecieDTO Specie { get; set; }
+
+    public GroupDTO Group { get; set; }
 
 
   }

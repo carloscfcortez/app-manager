@@ -6,6 +6,6 @@ namespace AppManager.Domain.Interfaces
 {
   public interface ITreeRepository : IRepositoryBase<Tree>
   {
-    IEnumerable<Tree> FindAllWithSpecie();
+    IEnumerable<Tree> FindAllWithIncludes(string specieName, string groupName);
   }
 }
