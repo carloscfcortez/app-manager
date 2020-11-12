@@ -27,7 +27,7 @@ env:
   # GKE_CLUSTER: cluster-1 # TODO: update to cluster name
   GKE_ZONE: us-east1 # TODO: update to cluster zone
   DEPLOYMENT_NAME: api # TODO: update to deployment name
-  IMAGE: static-site
+  # IMAGE: static-site
 
 jobs:
   setup-build-publish-deploy:
@@ -65,7 +65,7 @@ jobs:
       - name: Build
         run: |-
           cd api/ && docker build \
-            --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+            --tag "gcr.io/$PROJECT_ID/$DEPLOYMENT_NAME:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
             .
@@ -73,7 +73,7 @@ jobs:
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
-          cd api/ && docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+          cd api/ && docker push "gcr.io/$PROJECT_ID/$DEPLOYMENT_NAME:$GITHUB_SHA"
 
       # Set up kustomize
       - name: Set up Kustomize
