@@ -1,6 +1,9 @@
 ![API - Build and Deploy to Google Cloud](https://github.com/carloscfcortez/teste-upper/workflows/Build%20and%20Deploy%20to%20Google%20Cloud/badge.svg)
 ![Panel - Build and Deploy to Firebase Hosting](https://github.com/carloscfcortez/teste-upper/workflows/CI%20Panel%20-%20Frontend/badge.svg)
 
+URL Panel Firebase Hosting: [https://pomar-manager.web.app/](https://api-4yvggkd2mq-ue.a.run.app)
+URL API Swagger on Cloud Run: [https://api-4yvggkd2mq-ue.a.run.app](https://api-4yvggkd2mq-ue.a.run.app)
+
 # Sistema de Gerenciamento de Pomar
 
 ## Escopo
