@@ -47,6 +47,7 @@ O banco de dados do Postgres está na configuração apontando para o Cloud SQL 
 
 Construindo a imagem do container e levantando a instancia do container no docker localmente
 run command: 
+
 `cd api`
 
 `docker-compose build`
