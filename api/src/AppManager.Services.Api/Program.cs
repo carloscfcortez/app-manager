@@ -42,10 +42,12 @@ namespace AppManager.Services.Api
     }
     public static IHostBuilder CreateHostBuilder(string[] args)
     {
+      string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+      string url = String.Concat("http://0.0.0.0:", port);
       var host = Host.CreateDefaultBuilder(args)
           .ConfigureWebHostDefaults(webBuilder =>
           {
-            webBuilder.UseStartup<Startup>();
+            webBuilder.UseStartup<Startup>().UseUrls(url);
           });
 
       return host;
