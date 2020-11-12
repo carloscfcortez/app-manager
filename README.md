@@ -1,5 +1,5 @@
-![.NET Core](https://github.com/carloscfcortez/teste-upper/workflows/.NET%20Core/badge.svg?branch=main)
-![CI Panel - Frontend](https://github.com/carloscfcortez/teste-upper/workflows/CI%20Panel%20-%20Frontend/badge.svg)
+![API - Build and Deploy to Google Cloud](https://github.com/carloscfcortez/teste-upper/workflows/Build%20and%20Deploy%20to%20Google%20Cloud/badge.svg)
+![Panel - Build and Deploy to Firebase Hosting](https://github.com/carloscfcortez/teste-upper/workflows/CI%20Panel%20-%20Frontend/badge.svg)
 
 # Sistema de Gerenciamento de Pomar
 
@@ -13,7 +13,7 @@ Conceitos e tecnologias Utilizadas foram:
 - DDD
 - Visual Studio Code e Visual Studio 2019
 - Github Action
-- GCP - Cloud Run e Cloud SQL (Postgres)
+- GCP - Cloud Run, Cloud SQL (Postgres) e Firebase hosting
 
 
 ## Começando
