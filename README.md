@@ -20,6 +20,9 @@ Para executar o projeto é necessário instalar o SDK do .Net Core 3.1, Visual S
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [Visual Studio 2019](https://visualstudio.microsoft.com/pt-br/downloads/)
+- [Nodejs](https://nodejs.org/en/)
+- [YARN](https://yarnpkg.com/)
+
 
 ## Desenvolvimento
 
