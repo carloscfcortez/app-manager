@@ -49,7 +49,7 @@ Executar o Api
 
 ` dotnet run --launch-profile "AppManager.Services.Api"`
 
-Acessar a URL de documentação do Swagger: (http://localhost:5000/swagger/index.html)[http://localhost:5000/swagger/index.html]
+Acessar a URL de documentação do Swagger: [http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)
 
 ### Panel
 Para rodar o panel do frontend, navegar pelo diretório pelo CLI ou abrir o projeto da pasta `panel` 
