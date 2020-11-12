@@ -1,4 +1,5 @@
 ![.NET Core](https://github.com/carloscfcortez/teste-upper/workflows/.NET%20Core/badge.svg?branch=main)
+![CI Panel - Frontend](https://github.com/carloscfcortez/teste-upper/workflows/CI%20Panel%20-%20Frontend/badge.svg)
 
 # Sistema de Gerenciamento de Pomar
 
