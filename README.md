@@ -44,4 +44,25 @@ Restaurar os pacotes Nuget
 
 Executar o Api
 
-` dotnet run`
+` dotnet run --launch-profile "AppManager.Services.Api"`
+
+Acessar a URL de documentação do Swagger: (http://localhost:5000/swagger/index.html)[http://localhost:5000/swagger/index.html]
+
+### Panel
+Para rodar o panel do frontend, navegar pelo diretório pelo CLI ou abrir o projeto da pasta `panel` 
+
+> Utilizando YARN 
+- Instalando as dependencias do projeto pelo YARN
+`yarn install` ou somente `yarn`
+
+- Rodando a aplicação
+`yarn start`
+Abrir no navegador [http://localhost:3000](http://localhost:3000)
+
+> Utilizando NPM
+- Instalando as dependencias do projeto pelo NPM
+`npm install`
+
+- Rodando a aplicação
+`npm run start`
+Abrir no navegador [http://localhost:3000](http://localhost:3000)
