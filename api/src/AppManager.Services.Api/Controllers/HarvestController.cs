@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AppManager.Application.DTO;
 using AppManager.Application.Interfaces;
 using AppManager.Domain.Entities;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,9 +25,18 @@ namespace AppManager.Services.Api.Controllers
     }
 
     [HttpGet]
-    public async Task<IEnumerable<HarvestDTO>> Get()
+    public IEnumerable<HarvestDTO> Get([FromQuery] int groupId = 0
+    , [FromQuery] int treeId = 0
+    , [FromQuery] int specieId = 0
+    , [FromQuery] DateTime? periodStart = null
+    , [FromQuery] DateTime? periodEnd = null)
     {
-      IEnumerable<HarvestDTO> harvestDTO = _mapper.Map<IEnumerable<Harvest>, IEnumerable<HarvestDTO>>(await _service.FindAll());
+
+      IEnumerable<HarvestDTO> harvestDTO =
+      _mapper.Map<IEnumerable<Harvest>, IEnumerable<HarvestDTO>>(_service.FindAllWithIncludesAndFilters(treeId
+      , specieId
+      , specieId
+      , periodStart, periodStart));
       return harvestDTO;
     }
 

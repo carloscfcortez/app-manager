@@ -5,6 +5,7 @@ import Dashboard from '../pages/Dashboard'
 import GroupsRouptes from '../pages/Groups'
 import SpeciesRoutes from '../pages/Species'
 import TreesRoutes from '../pages/Trees'
+import HarvestsRoutes from '../pages/Harvests'
 
 const hist = createBrowserHistory()
 
@@ -17,6 +18,7 @@ export function Navigation() {
         <Route path="/groups" component={GroupsRouptes}></Route>
         <Route path="/species" component={SpeciesRoutes}></Route>
         <Route path="/trees" component={TreesRoutes}></Route>
+        <Route path="/harvests" component={HarvestsRoutes}></Route>
         <Redirect to={'/dashboard'}></Redirect>
       </Switch>
     </BrowserRouter>

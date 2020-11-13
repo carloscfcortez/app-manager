@@ -6,11 +6,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap'
 
 const NavbarDefault = () => {
@@ -37,19 +33,7 @@ const NavbarDefault = () => {
             <NavItem>
               <NavLink href="/species/">Espécies</NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Relatórios
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Colheitas</DropdownItem>
-                <DropdownItem>Árvores</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Grupos</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
           </Nav>
-          {/* <NavbarText>Simple Text</NavbarText> */}
         </Collapse>
       </Navbar>
     </div>

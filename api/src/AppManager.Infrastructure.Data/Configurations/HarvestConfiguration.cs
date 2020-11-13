@@ -4,12 +4,15 @@ using AppManager.Domain.Entities;
 
 namespace AppManager.Infrastructure.Data.Configurations
 {
-    public class HarvestConfiguration : IEntityTypeConfiguration<Harvest>
+  public class HarvestConfiguration : IEntityTypeConfiguration<Harvest>
+  {
+    public void Configure(EntityTypeBuilder<Harvest> builder)
     {
-        public void Configure(EntityTypeBuilder<Harvest> builder)
-        {
-            builder.Property(x => x.GrossWeight).HasColumnType("decimal(18,2)");
-            builder.ToTable("Harvest");
-        }
+      builder.Property(x => x.GrossWeight).HasColumnType("decimal(18,2)");
+
+      builder.HasOne(x => x.Tree);
+
+      builder.ToTable("Harvest");
     }
+  }
 }

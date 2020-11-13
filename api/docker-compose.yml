@@ -1,5 +1,19 @@
 version: "3.8"
 services:
+  postgres:
+    image: postgres:12
+    container_name: "postgres"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: app-manager
+      PGDATA: /tmp
+    volumes:
+      - ./pgdata:/var/lib/postgresql/pg
+    ports:
+      - 5432:5432
+    networks:
+      - appmanager_network
   web:
     # container_name: web-api
     build: .
@@ -8,30 +22,22 @@ services:
     networks:
       - appmanager_network
     depends_on:
-      - db
-  db:
-    # container_name: db-sql
-    image: "mcr.microsoft.com/mssql/server"
+      - postgres
     environment:
-      SA_PASSWORD: "@Prog2020#"
-      ACCEPT_EULA: "Y"
-    ports:
-      - "1433:1433"
-    networks:
-      - appmanager_network
-  postgres:
-    image: postgres:9.6
-    container_name: "postgres"
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: AppManager
-      PGDATA: /tmp
-    volumes:
-      - ./pgdata:/var/lib/postgresql/pg
-    ports:
-      - 5432:5432
-    networks:
-      - appmanager_network
+      ASPNETCORE_ENVIRONMENT: Development
+      PORT: "8000"
+      URI: "http://localhost"
+
+  # db:
+  #   # container_name: db-sql
+  #   image: "mcr.microsoft.com/mssql/server"
+  #   environment:
+  #     SA_PASSWORD: "@Prog2020#"
+  #     ACCEPT_EULA: "Y"
+  #   ports:
+  #     - "1433:1433"
+  #   networks:
+  #     - appmanager_network
+
 networks:
   appmanager_network:
