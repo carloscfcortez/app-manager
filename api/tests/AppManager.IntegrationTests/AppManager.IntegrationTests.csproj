@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
-    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppManager.Services.Api\AppManager.Services.Api.csproj" />
+    <ProjectReference Include="..\..\src\AppManager.Application\AppManager.Application.csproj" />
+    <ProjectReference Include="..\..\src\AppManager.Infrastructure.Data\AppManager.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>
