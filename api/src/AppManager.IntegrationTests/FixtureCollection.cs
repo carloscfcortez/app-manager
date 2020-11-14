@@ -24,7 +24,7 @@ namespace AppManager.IntegrationTests
                 HandleCookies = false,
                 BaseAddress = new Uri("http://localhost:5000"),
                 AllowAutoRedirect = true,
-                //MaxAutomaticRedirections = 7
+                MaxAutomaticRedirections = 7
             };
 
             factory = new AppFactory<T>();
