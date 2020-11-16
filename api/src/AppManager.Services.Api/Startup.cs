@@ -35,14 +35,18 @@ namespace AppManager.Services.Api
       }
       else
       {
-        var appSettingsVariable = Environment.GetEnvironmentVariable("APP_SETTINGS");
-        Console.WriteLine("Found Appsettings: " + appSettingsVariable.ToString());
-        if (!string.IsNullOrEmpty(appSettingsVariable))
+        // var appSettingsVariable = Environment.GetEnvironmentVariable("APP_SETTINGS");
+
+        Console.WriteLine("POSTGRES_CONNECTION: " + Environment.GetEnvironmentVariable("POSTGRES_CONNECTION").ToString());
+        if (env.IsProduction())
         {
-          File.AppendAllText("appsettings.json", appSettingsVariable.ToString());
+          //   File.AppendAllText("appsettings.json", System.Text.Json.JsonDocument(appSettingsVariable.ToString()));
           builder.AddJsonFile($"appsettings.json", optional: true, reloadOnChange: true);
           builder.AddEnvironmentVariables();
           Configuration = builder.Build();
+
+          Configuration.GetSection("ConnectionStrings")
+            .Bind("PostgresConnection", Environment.GetEnvironmentVariable("POSTGRES_CONNECTION").ToString());
         }
 
         Configuration = configuration;
