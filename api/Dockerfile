@@ -23,5 +23,6 @@ RUN dotnet publish "AppManager.Services.Api.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 ENV ASPNETCORE_URLS=http://+:80
+ENV ASPNETCORE_ENVIRONMENT=Production
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "AppManager.Services.Api.dll"]
