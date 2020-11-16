@@ -39,8 +39,8 @@ namespace AppManager.Services.Api
         Console.WriteLine("Found Appsettings: " + appSettingsVariable.ToString());
         if (!string.IsNullOrEmpty(appSettingsVariable))
         {
-
-          builder.AddJsonStream(new MemoryStream(Encoding.UTF8.GetBytes(appSettingsVariable.ToString())));
+          File.AppendAllText("appsettings.json", appSettingsVariable.ToString());
+          builder.AddJsonFile($"appsettings.json", optional: true, reloadOnChange: true);
           builder.AddEnvironmentVariables();
           Configuration = builder.Build();
         }
