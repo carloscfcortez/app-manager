@@ -1,9 +1,9 @@
 ![API - Build and Deploy to Google Cloud](https://github.com/carloscfcortez/teste-upper/workflows/Build%20and%20Deploy%20to%20Google%20Cloud/badge.svg)
 ![Panel - Build and Deploy to Firebase Hosting](https://github.com/carloscfcortez/teste-upper/workflows/CI%20Panel%20-%20Frontend/badge.svg)
 
-URL Panel Firebase Hosting: [https://pomar-manager.web.app/](https://api-4yvggkd2mq-ue.a.run.app)
+> URL Panel Firebase Hosting: [https://pomar-manager.web.app/](https://pomar-manager.web.app/)
 
-URL API Swagger on Cloud Run: [https://api-4yvggkd2mq-ue.a.run.app](https://api-4yvggkd2mq-ue.a.run.app)
+>URL API Swagger on Cloud Run: [https://api-ipcwnp2hha-ue.a.run.app/swagger](https://api-ipcwnp2hha-ue.a.run.app/swagger)
 
 # Sistema de Gerenciamento de Pomar
 
@@ -37,7 +37,7 @@ Para executar o projeto é necessário instalar o SDK do .Net Core 3.1, Visual S
 
 Para contribuir com o desenvolvimento, basta fazer o clone do projeto em uma diretório de sua preferencia:
 
-`git clone https://github.com/carloscfcortez/teste-upper.git`
+`git clone https://github.com/carloscfcortez/app-manager.git`
 
 ## Executar
 O repositório está composto por dois projetos, um Frontend ([panel](/panel)) e outro Backend ([api](/api))
