@@ -36,11 +36,11 @@ namespace AppManager.Services.Api
       else
       {
         var appSettingsVariable = Environment.GetEnvironmentVariable("APP_SETTINGS");
-        Console.WriteLine("Appsettings", string.IsNullOrEmpty(appSettingsVariable));
+        Console.WriteLine("Found Appsettings", string.IsNullOrEmpty(appSettingsVariable).ToString());
         if (!string.IsNullOrEmpty(appSettingsVariable))
         {
 
-          builder.AddJsonStream(new MemoryStream(Encoding.UTF8.GetBytes(appSettingsVariable)));
+          builder.AddJsonStream(new MemoryStream(Encoding.UTF8.GetBytes(appSettingsVariable.ToString())));
           builder.AddEnvironmentVariables();
           Configuration = builder.Build();
         }
