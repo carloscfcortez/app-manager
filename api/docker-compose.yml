@@ -14,19 +14,6 @@ services:
       - 5432:5432
     networks:
       - appmanager_network
-  web:
-    # container_name: web-api
-    build: .
-    ports:
-      - "8000:80"
-    networks:
-      - appmanager_network
-    depends_on:
-      - postgres
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      PORT: "8000"
-      URI: "http://localhost"
 
   # db:
   #   # container_name: db-sql

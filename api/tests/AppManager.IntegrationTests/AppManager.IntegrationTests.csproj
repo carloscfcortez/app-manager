@@ -5,13 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.15.1" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
@@ -20,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\AppManager.Application\AppManager.Application.csproj" />
     <ProjectReference Include="..\..\src\AppManager.Infrastructure.Data\AppManager.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\..\src\AppManager.Services.Api\AppManager.Services.Api.csproj" />
   </ItemGroup>
 
 </Project>
