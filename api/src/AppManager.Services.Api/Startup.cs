@@ -18,130 +18,138 @@ using AppManager.Infrastructure.Data.Context;
 using AppManager.Infrastructure.Data.Repositories;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace AppManager.Services.Api
 {
-  public class Startup
-  {
-    public Startup(IWebHostEnvironment env, IConfiguration configuration)
+    public class Startup
     {
-      var builder = new ConfigurationBuilder();
-      if (!env.IsProduction())
-      {
-        builder.SetBasePath(env.ContentRootPath)
-            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-        builder.AddEnvironmentVariables();
-        Configuration = builder.Build();
-      }
-      else
-      {
-        // var appSettingsVariable = Environment.GetEnvironmentVariable("APP_SETTINGS");
-
-        Console.WriteLine("POSTGRES_CONNECTION: " + Environment.GetEnvironmentVariable("POSTGRES_CONNECTION").ToString());
-        if (env.IsProduction())
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
-          //   File.AppendAllText("appsettings.json", System.Text.Json.JsonDocument(appSettingsVariable.ToString()));
-          builder.AddJsonFile($"appsettings.json", optional: true, reloadOnChange: true);
-          builder.AddEnvironmentVariables();
-          Configuration = builder.Build();
+            var builder = new ConfigurationBuilder();
+            if (!env.IsProduction())
+            {
+                builder.SetBasePath(env.ContentRootPath)
+                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                builder.AddEnvironmentVariables();
+                Configuration = builder.Build();
+            }
+            else
+            {
+                Console.WriteLine("APP_SETTINGS: " + Environment.GetEnvironmentVariable("APP_SETTINGS").ToString());
+                if (env.IsProduction())
+                {
 
-          Configuration.GetSection("ConnectionStrings")
-            .Bind("PostgresConnection", Environment.GetEnvironmentVariable("POSTGRES_CONNECTION").ToString());
+                    var filePath = Path.Combine(AppContext.BaseDirectory, "appSettings.json");
+                    var strinvalue = Environment.GetEnvironmentVariable("APP_SETTINGS").ToString()
+                        .Replace("\"", "\'")
+                        .Replace("\n", " ");
+
+                    dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(strinvalue);
+
+                    string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+                    File.WriteAllText(filePath, output);
+
+                    builder.AddJsonFile($"appsettings.json", optional: true, reloadOnChange: true);
+                    builder.AddEnvironmentVariables();
+                    Configuration = builder.Build();
+
+                }
+
+                Configuration = configuration;
+            }
+
+
         }
 
-        Configuration = configuration;
-      }
+        public IConfiguration Configuration { get; }
 
-
-    }
-
-    public IConfiguration Configuration { get; }
-
-    public void ConfigureServices(IServiceCollection services)
-    {
-
-      services.AddCors(options =>
-      {
-        options.AddPolicy("CorsPolicy",
-                  builder => builder.AllowAnyOrigin()
-                  .AllowAnyMethod()
-                  .AllowAnyHeader());
-      });
-
-      services.AddControllersWithViews().AddNewtonsoftJson(options =>
+        public void ConfigureServices(IServiceCollection services)
         {
-          options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-        });
-      services.AddControllers();
 
-      services.AddAutoMapper(typeof(DtoToEntityProfile), typeof(EntityToDtoProfile));
 
-      services.AddSwaggerGen(c =>
-      {
-        c.SwaggerDoc("v1", new OpenApiInfo
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+              {
+                  options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+              });
+            services.AddControllers();
+
+            services.AddAutoMapper(typeof(DtoToEntityProfile), typeof(EntityToDtoProfile));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "AppManager API",
+                    Description = "A simple API for search AppManager",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Carlos Cortez",
+                        Email = "carlos.cfcortez@gmail.com",
+                        Url = new Uri("https://github.com/carloscfcortez"),
+                    },
+                });
+            });
+
+
+            // services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgresConnection")));
+            services.AddTransient<IGroupService, GroupService>();
+            services.AddTransient<IGroupAppService, GroupAppService>();
+            services.AddTransient<IGroupRepository, GroupRepository>();
+
+
+            services.AddTransient<ISpecieService, SpecieService>();
+            services.AddTransient<ISpecieAppService, SpecieAppService>();
+            services.AddTransient<ISpecieRepository, SpecieRepository>();
+
+
+            services.AddTransient<ITreeService, TreeService>();
+            services.AddTransient<ITreeAppService, TreeAppService>();
+            services.AddTransient<ITreeRepository, TreeRepository>();
+
+
+            services.AddTransient<IHarvestService, HarvestService>();
+            services.AddTransient<IHarvestAppService, HarvestAppService>();
+            services.AddTransient<IHarvestRepository, HarvestRepository>();
+
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-          Version = "v1",
-          Title = "AppManager API",
-          Description = "A simple API for search AppManager",
-          Contact = new OpenApiContact
-          {
-            Name = "Carlos Cortez",
-            Email = "carlos.cfcortez@gmail.com",
-            Url = new Uri("https://github.com/carloscfcortez"),
-          },
-        });
-      });
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AppManager API");
+            });
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            // app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
 
-      // services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
-      services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgresConnection")));
-      services.AddTransient<IGroupService, GroupService>();
-      services.AddTransient<IGroupAppService, GroupAppService>();
-      services.AddTransient<IGroupRepository, GroupRepository>();
+            app.UseAuthorization();
 
-
-      services.AddTransient<ISpecieService, SpecieService>();
-      services.AddTransient<ISpecieAppService, SpecieAppService>();
-      services.AddTransient<ISpecieRepository, SpecieRepository>();
-
-
-      services.AddTransient<ITreeService, TreeService>();
-      services.AddTransient<ITreeAppService, TreeAppService>();
-      services.AddTransient<ITreeRepository, TreeRepository>();
-
-
-      services.AddTransient<IHarvestService, HarvestService>();
-      services.AddTransient<IHarvestAppService, HarvestAppService>();
-      services.AddTransient<IHarvestRepository, HarvestRepository>();
-
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
     }
-
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-      app.UseSwagger();
-
-      app.UseSwaggerUI(c =>
-      {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "AppManager API");
-      });
-      if (env.IsDevelopment())
-      {
-        app.UseDeveloperExceptionPage();
-      }
-
-      // app.UseHttpsRedirection();
-
-      app.UseRouting();
-
-      app.UseCors("CorsPolicy");
-
-
-      app.UseAuthorization();
-
-      app.UseEndpoints(endpoints =>
-      {
-        endpoints.MapControllers();
-      });
-    }
-  }
 }

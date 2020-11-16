@@ -23,8 +23,21 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "PORT" : "5000",
+        "PORT": "5000",
         "URI": "http://localhost"
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    },
+    "API Production": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "POSTGRES_CONNECTION": "",
+        "PORT": "5000",
+        "URI": "http://localhost",
+        "APP_SETTINGS": ""
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
     },
