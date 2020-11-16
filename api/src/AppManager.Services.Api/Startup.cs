@@ -36,7 +36,7 @@ namespace AppManager.Services.Api
       else
       {
         var appSettingsVariable = Environment.GetEnvironmentVariable("APP_SETTINGS");
-        Console.WriteLine("Found Appsettings", string.IsNullOrEmpty(appSettingsVariable).ToString());
+        Console.WriteLine("Found Appsettings: " + appSettingsVariable.ToString());
         if (!string.IsNullOrEmpty(appSettingsVariable))
         {
 
