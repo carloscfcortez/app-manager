@@ -74,7 +74,7 @@ Restaurar os pacotes Nuget
 
 ` dotnet restore`
 
-Executar o Api
+Executar a Api
 
 ` dotnet run --launch-profile "AppManager.Services.Api"`
 
