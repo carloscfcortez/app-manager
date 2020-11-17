@@ -36,11 +36,11 @@ namespace AppManager.Services.Api
             }
             else
             {
-                Console.WriteLine("POSTGRES_CONNECTION: " + Environment.GetEnvironmentVariable("POSTGRES_CONNECTION").ToString());
+                /// Console.WriteLine("POSTGRES_CONNECTION: " + Environment.GetEnvironmentVariable("POSTGRES_CONNECTION").ToString());
                 if (env.IsProduction())
                 {
                     builder.SetBasePath(env.ContentRootPath);
-                    var filePath = Path.Combine(env.ContentRootPath, "appSettings.json");
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "appSettings.json");
                     var stringValue = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION");
                   
 

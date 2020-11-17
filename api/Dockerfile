@@ -6,13 +6,13 @@ EXPOSE 80/tcp
 EXPOSE 443/tcp
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-WORKDIR /src
-COPY ["src/AppManager.Services.Api/AppManager.Services.Api.csproj", "AppManager.Services.Api/"]
-COPY ["src/AppManager.Infrastructure.CrossCutting/AppManager.Infrastructure.CrossCutting.csproj", "AppManager.Infrastructure.CrossCutting/"]
-COPY ["src/AppManager.Domain/AppManager.Domain.csproj", "AppManager.Domain/"]
-COPY ["src/AppManager.Infrastructure.Data/AppManager.Infrastructure.Data.csproj", "AppManager.Infrastructure.Data/"]
-COPY ["src/AppManager.Application/AppManager.Application.csproj", "AppManager.Application/"]
-RUN dotnet restore "AppManager.Services.Api/AppManager.Services.Api.csproj"
+WORKDIR /
+COPY ["src/AppManager.Services.Api/AppManager.Services.Api.csproj", "src/AppManager.Services.Api/"]
+COPY ["src/AppManager.Infrastructure.CrossCutting/AppManager.Infrastructure.CrossCutting.csproj", "src/AppManager.Infrastructure.CrossCutting/"]
+COPY ["src/AppManager.Domain/AppManager.Domain.csproj", "src/AppManager.Domain/"]
+COPY ["src/AppManager.Infrastructure.Data/AppManager.Infrastructure.Data.csproj", "src/AppManager.Infrastructure.Data/"]
+COPY ["src/AppManager.Application/AppManager.Application.csproj", "src/AppManager.Application/"]
+RUN dotnet restore "src/AppManager.Services.Api/AppManager.Services.Api.csproj"
 COPY . .
 
 WORKDIR "/src/AppManager.Services.Api"
