@@ -36,16 +36,17 @@ namespace AppManager.Services.Api
             }
             else
             {
-                Console.WriteLine("APP_SETTINGS: " + Environment.GetEnvironmentVariable("APP_SETTINGS").ToString());
+                Console.WriteLine("POSTGRES_CONNECTION: " + Environment.GetEnvironmentVariable("POSTGRES_CONNECTION").ToString());
                 if (env.IsProduction())
                 {
+                    builder.SetBasePath(env.ContentRootPath);
+                    var filePath = "appSettings.json";
+                    var stringValue = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION").ToString();
+                  
 
-                    var filePath = Path.Combine(AppContext.BaseDirectory, "appSettings.json");
-                    var strinvalue = Environment.GetEnvironmentVariable("APP_SETTINGS").ToString()
-                        .Replace("\"", "\'")
-                        .Replace("\n", " ");
-
-                    dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(strinvalue);
+                    var jsonObj = JObject.Parse(File.ReadAllText(filePath));
+                    var connections = jsonObj.SelectToken("ConnectionStrings");
+                    connections.Replace(JObject.FromObject(new { PostgresConnection = stringValue }));
 
                     string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
                     File.WriteAllText(filePath, output);
