@@ -40,8 +40,8 @@ namespace AppManager.Services.Api
                 if (env.IsProduction())
                 {
                     builder.SetBasePath(env.ContentRootPath);
-                    var filePath = "appSettings.json";
-                    var stringValue = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION").ToString();
+                    var filePath = Path.Combine(env.ContentRootPath, "appSettings.json");
+                    var stringValue = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION");
                   
 
                     var jsonObj = JObject.Parse(File.ReadAllText(filePath));
