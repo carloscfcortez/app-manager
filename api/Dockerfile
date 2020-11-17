@@ -14,7 +14,8 @@ COPY ["src/AppManager.Infrastructure.Data/AppManager.Infrastructure.Data.csproj"
 COPY ["src/AppManager.Application/AppManager.Application.csproj", "AppManager.Application/"]
 RUN dotnet restore "AppManager.Services.Api/AppManager.Services.Api.csproj"
 COPY . .
-WORKDIR "/AppManager.Services.Api"
+
+WORKDIR "/src/AppManager.Services.Api"
 RUN dotnet build "AppManager.Services.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
